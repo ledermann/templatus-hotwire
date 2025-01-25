@@ -1,22 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss' source('../..');
 
-:root {
-  --color-primary: 105 0 0; /* dark red */
-  --color-secondary: 211 0 1; /* light red */
-  --color-tertiary: 240 231 233; /* rose */
-  --color-accent: 21 209 216; /* cyan */
+@plugin '@tailwindcss/forms';
+
+@theme {
+  --color-primary: oklch(33.07% 0.1305 28.4); /* dark red */
+  --color-secondary: oklch(54.44% 0.2233 29.15); /* light red */
+  --color-tertiary: oklch(93.56% 0.0101 1.99); /* rose */
+  --color-accent: oklch(78.28% 0.1309 199.19); /* cyan */
+}
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
 }
 
 .gradient__primary {
-  stop-color: rgb(var(--color-primary));
+  stop-color: var(--color-primary);
 }
 
 .gradient__secondary {
-  stop-color: rgb(var(--color-secondary));
+  stop-color: var(--color-secondary);
 }
 
 .gradient__accent {
-  stop-color: rgb(var(--color-accent));
+  stop-color: var(--color-accent);
 }
